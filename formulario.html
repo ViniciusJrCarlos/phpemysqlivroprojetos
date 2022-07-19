@@ -1,7 +1,7 @@
 <html>
 
     <head>
-            <title>Formúlario - exemplo 1 </title>
+            <title>Formulario - exemplo 1 </title>
             <script language="JavaScript">
             
                 function validaForm(){
@@ -31,25 +31,26 @@
                         alert( " O campo 'E-mail' deve ter preenchimento corretamente. " );
                         return FALSE;
                     }
-                   
-                    var campo_sexo = document.forms["meuForm"].CAMPO_SEXO;
-                    var sexo = FALSE;
-                    for (i = 0; i<campo_sexo.length; i++)
-                    {
-                            if(campo_sexo[i].checked == TRUE)
-                            {
+                    
+                  
+                        var campo_sexo = document.forms["meuForm"].CAMPO_SEXO;
+                        var sexo = FALSE;
+                        for (i = 0; i<campo_sexo.length; i++)
+                        {
+                                if(campo_sexo[i].checked == TRUE)
+                                {
 
-                                sexo = campo_sexo[i].value;
-                                break;
+                                    sexo = campo_sexo[i].value;
+                                    break;
 
-                            }
-                    }
-                    if(sexo == FALSE)
-                    {
-                        alert(" O campo 'Sexo' deve ser preenchido .");
-                        return FALSE;
-                    }
-
+                                }
+                        }
+                        if(sexo == FALSE)
+                        {
+                            alert(" O campo 'Sexo' deve ser preenchido .");
+                            return FALSE;
+                        }
+                
                     var opcao_curso = document.forms["meuForm"].campo_curso.selectedIndex;
                     if(opcao_curso == 0)
                     {
@@ -79,8 +80,8 @@
 
                     }
 
-
-                    return TRUE;
+                    document.forms["meuForm"].submit();
+                    //return TRUE;
 
                 }
             
@@ -91,11 +92,11 @@
 
         <form method="POST" action="?action=save" name="meuForm">
 
-            Nome:   <input type="text" name="campo_nome"><br><br>
-            Idade:  <input type="text" name="campo_idade"><br><br>
-            E-mail: <input type="text" name="campo_email"><br><br>
-            Sexo:   <input type="radio" name="CAMPO_SEXO" value="masculino">Masculino
-                    <input type="radio" name="CAMPO_SEXO" value="feminino">Feminino
+            Nome:   <input type="text" name="campo_nome"   value="<? echo $_POST['campo_nome'];    ?>"><br><br>
+            Idade:  <input type="text" name="campo_idade"  value="<? echo $_POST['campo_idade'];   ?>"><br><br>
+            E-mail: <input type="text" name="campo_email"  value="<? echo $_POST['campo_email'];   ?>"><br><br>
+            Sexo:   <input type="radio" name="CAMPO_SEXO"  value="<?php if ($_POST['CAMPO_SEXO'] == 'masculino'){echo 'checked';}?>">Masculino
+                    <input type="radio" name="CAMPO_SEXO"  value="<?php if ($_POST['CAMPO_SEXO'] == 'feminino'){echo 'checked';}?>">Feminino
 
             <br><br>
             Curso: <select name="campo_curso">
